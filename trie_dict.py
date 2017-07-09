@@ -46,39 +46,6 @@ class Trie(object):
                 node = node.children[letter]
         return node.is_complete
 
-    def find_all(self, key):
-        node = self.node
-        for letter in key:
-            child_values = [child.value for child in node.children]
-            try:
-                index = child_values.index(letter)
-            except ValueError:
-                # No matches
-                return []
-            node = node.children[index]
-        suffixes = self._get_suffixes(node)
-        # This repeats the letter at the end of the key.
-        return ["".join([key, suffix]) for suffix in suffixes]
-
-    def words(self):
-        return self._get_suffixes(self.node)
-
-    def _get_suffixes(self, node):
-        """
-        return a list of string endings
-        """
-        all_endings = []
-        # Can't str.join None
-        value = node.value if node.value is not None else ""
-        if len(node.children) == 0:
-            return [value]
-        for child in node.children:
-            endings = self._get_suffixes(child)
-            all_endings.extend(
-                ["".join([value, ending]) for ending in endings])
-        return all_endings
-
-
 trie = Trie()
 trie.insert("hello")
 trie.insert("hey")
