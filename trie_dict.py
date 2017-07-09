@@ -46,9 +46,31 @@ class Trie(object):
                 node = node.children[letter]
         return node.is_complete
 
-trie = Trie()
-trie.insert("hello")
-trie.insert("hey")
-trie.insert("trie")
-print trie
-print trie.find("hey")
+    def search(self, key):
+        node = self.node
+        for letter in key:
+            if letter not in node.children:
+                return False
+            else:
+                node = node.children[letter]
+        return True
+
+
+if __name__ == "__main__":
+    trie = Trie()
+    with open("words") as word_file:
+        i = 0
+        for line in word_file:
+            if i > 10:
+                break
+            trie.insert(line)
+            i += 1
+    print trie
+    print trie.find("zebr")
+
+# trie = Trie()
+# trie.insert("hello")
+# trie.insert("hey")
+# trie.insert("trie")
+# print trie
+# print trie.find("hey")
