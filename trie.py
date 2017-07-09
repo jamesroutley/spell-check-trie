@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import collections
-
-
 class Node(object):
 
     def __repr__(self):
