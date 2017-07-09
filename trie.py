@@ -30,21 +30,17 @@ class Trie(object):
         return self.__repr__()
 
     def insert(self, key):
-        self._insert(self.node, key)
-
-    def _insert(self, node, key):
-        if len(key) == 0:
-            node.is_complete = True
-            return
-        letter = key[0]
-        child_values = [child.value for child in node.children]
-        if letter in child_values:
-            node_index = child_values.index(letter)
-            new_node = node.children[node_index]
-        else:
-            new_node = Node(letter)
-            node.children.append(new_node)
-        self._insert(new_node, key[1:])
+        node = self.node
+        for letter in key:
+            child_values = [child.value for child in node.children]
+            if letter in child_values:
+                node_index = child_values.index(letter)
+                node = node.children[node_index]
+            else:
+                new_node = Node(letter)
+                node.children.append(new_node)
+                node = new_node
+        node.is_complete = True
 
     def find(self, key):
         node = self.node
@@ -94,5 +90,6 @@ trie = Trie()
 trie.insert("hello")
 trie.insert("hey")
 trie.insert("trie")
+print trie
 print trie.find("hey")
 print trie.find_all("t")
