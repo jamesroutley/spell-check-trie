@@ -13,16 +13,6 @@ def calculate_trie_complexity(test_case):
 
 
 if __name__ == "__main__":
-    num_tries = 100
-    num_samples = 1000
-
-    with open("words") as word_file:
-        words = word_file.readlines()
-
-    words = [word.strip() for word in words]
-
-    print "starting tests"
-
     trie = trie_dict.Trie()
     trie.insert(string.ascii_letters)
 

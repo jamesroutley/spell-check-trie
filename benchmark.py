@@ -3,6 +3,8 @@
 import random
 import timeit
 
+import pympler.asizeof
+
 import binary_search
 import trie_dict
 
@@ -56,3 +58,6 @@ if __name__ == "__main__":
         number=num_tries)
     print "Trie search {} items {} times: {}".format(
         num_samples, num_tries, result)
+
+    print "Word list size: {}".format(pympler.asizeof.asizeof(words))
+    print "Trie size: {}".format(pympler.asizeof.asizeof(trie))
